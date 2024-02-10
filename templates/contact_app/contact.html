@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} BGD Fashion | Contact {% endblock title %}
+{% block body %}
+
+
+<section id="contractus">
+    <div class="container">
+        <div class="row mt-5 pt-5">
+            <div class="col-12 col-lg-6">
+                {% for row in contact_details %}
+                <h1>Contract Information</h1><br>
+                <h4>Address:</h4>
+                <p>{{ row.address }}</p>
+                <h4>Phone:</h4>
+                <p>{{ row.phone }}</p>
+                <h4>Mobile:</h4>
+                <p>{{ row.mobile }}</p>
+                <h4>Email:</h4>
+                <p>{{ row.email }}</p>
+                {% endfor %}
+            </div>
+            <div class="iframe col-12 col-lg-6">
+                <iframe width="600" height="500" id="gmap_canvas"
+                    src="https://maps.google.com/maps?q=Mamun%20Tower,%20Mamun%20Tower,%20Begum%20Rokeya%20Avenue,%20Dacca&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                    frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

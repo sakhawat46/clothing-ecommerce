@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load category %}
+{% block title %} BGD Fashion | Category {% endblock title %}
+{% block body %}
+
+        <main class="main">
+        	<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+        		<div class="container">
+        			<h1 class="page-title">Categories<span>Shop</span></h1>
+        		</div><!-- End .container -->
+        	</div><!-- End .page-header -->
+            <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="page-content">
+                <div class="container">
+                    
+
+                    <div class="products">
+                        <div class="row">
+
+                            
+                            
+
+                            {% if product %}
+                            {% for all_product in product %}
+
+                            <div class="col-6 col-md-4 col-lg-4 col-xl-3">
+                                
+                          
+                                <div class="product">
+                                    <figure class="product-media">
+                                        
+                                        <a href="{{ all_product.get_product_url }}">
+                                            <img src="{{ all_product.image.url }}" alt="Product image" class="product-image">
+                                        </a>
+
+                                    </figure><!-- End .product-media -->
+
+                                    <div class="product-body">
+                                        <div class="product-cat">
+                                            <a href="#">{{ category.name }}</a>
+                                        </div><!-- End .product-cat -->
+                                        
+                                        <h3 class="product-title"><a href="{{ all_product.get_product_url }}">{{ all_product.name }}</a></h3><!-- End .product-title -->
+                                        
+                                        <div class="product-price">
+                                            $ {{ all_product.price }}
+                                        </div><!-- End .product-price -->
+
+                                    </div><!-- End .product-body -->
+                                </div><!-- End .product -->
+                                
+                                
+                            </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
+                            {% endfor %}
+                            {% else %}
+                            <h3>Product Not Found</h3>
+                            {% endif %}
+
+
+                            
+                            
+
+
+                        </div><!-- End .row -->
+
+                        <div class="load-more-container text-center">
+                            <a href="{% url 'store_app:shop' %}" class="btn btn-outline-darker btn-load-more">More Products <i class="icon-refresh"></i></a>
+                        </div><!-- End .load-more-container -->
+                    </div><!-- End .products -->
+
+                    <div class="sidebar-filter-overlay"></div><!-- End .sidebar-filter-overlay -->
+                    
+
+                </div><!-- End .container -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+
+        {% endblock %}

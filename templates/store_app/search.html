@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load category %}
+{% load static %}
+{% block title %} BGD Fashion | Search {% endblock title %}
+{% block body %}
+
+<main class="main">
+
+    <div class="mb-4"></div><!-- End .mb-4 -->
+
+    <div class="mb-3"></div><!-- End .mb-5 -->
+
+    <div class="mb-6"></div><!-- End .mb-6 -->
+
+    <div class="mb-5"></div><!-- End .mb-5 -->
+
+    <div class="container for-you">
+        <div class="heading heading-flex mb-3">
+            <div class="heading-left">
+                <h2 class="title">All Products</h2><!-- End .title -->
+            </div><!-- End .heading-left -->
+        </div><!-- End .heading -->
+
+        <div class="products">
+            <div class="row justify-content-center">
+
+                {% if products %}
+                {% for product in products %}
+
+                <div class="col-6 col-md-4 col-lg-3">
+
+                    <div class="product product-2">
+                        <figure class="product-media">
+
+                            <a href="{{ product.get_product_url }}">
+                                <img src="{{ product.image.url }}" alt="Product image" class="product-image">
+                            </a>
+
+                            {% comment %} <div class="product-action">
+                                <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to
+                                        cart</span></a>
+
+                            </div><!-- End .product-action --> {% endcomment %}
+
+
+                        </figure><!-- End .product-media -->
+
+                        <div class="product-body">
+                            <div class="product-cat">
+                                <a href="#">{{ product.category }}</a>
+                            </div><!-- End .product-cat -->
+                            <h3 class="product-title"><a href="{{ product.get_product_url }}">{{ product.name }}</a>
+                            </h3><!-- End .product-title -->
+                            <div class="product-price">
+                                <span class="new-price">৳ {{product.price}}</span>
+
+                            </div><!-- End .product-price -->
+
+                            {% if product.old_price %}
+                            <div class="product-price">
+                                <del> <span class="old-price">৳ {{product.old_price}}</span> </del>
+                            </div><!-- End .product-price -->
+                            {% endif %}
+
+                            {% comment %} <div class="ratings-container">
+                                <div class="ratings">
+                                    <div class="ratings-val" style="width: 40%;"></div><!-- End .ratings-val -->
+                                </div><!-- End .ratings -->
+                                <span class="ratings-text">( 4 Reviews )</span>
+                            </div><!-- End .rating-container --> {% endcomment %}
+
+                        </div><!-- End .product-body -->
+                    </div><!-- End .product -->
+
+                </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+                {% endfor %}
+                {% else %}
+                <div>
+                    <h3 class="text-center text-warning">Product Not Found</h3>
+                </div>
+                {% endif %}
+
+            </div><!-- End .row -->
+        </div><!-- End .products -->
+
+    </div><!-- End .container -->
+
+    <div class="mb-4"></div><!-- End .mb-4 -->
+
+    <div class="container">
+        <hr class="mb-0">
+    </div><!-- End .container -->
+
+    <div class="icon-boxes-container bg-transparent">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="icon-box icon-box-side">
+                        <span class="icon-box-icon text-dark">
+                            <i class="icon-rocket"></i>
+                        </span>
+                        <div class="icon-box-content">
+                            <h3 class="icon-box-title">Free Shipping</h3><!-- End .icon-box-title -->
+                            <p>Every Orders</p>
+                        </div><!-- End .icon-box-content -->
+                    </div><!-- End .icon-box -->
+                </div><!-- End .col-sm-6 col-lg-3 -->
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="icon-box icon-box-side">
+                        <span class="icon-box-icon text-dark">
+                            <i class="icon-rotate-left"></i>
+                        </span>
+
+                        <div class="icon-box-content">
+                            <h3 class="icon-box-title">Free Returns</h3><!-- End .icon-box-title -->
+                            <p>Within 30 days</p>
+                        </div><!-- End .icon-box-content -->
+                    </div><!-- End .icon-box -->
+                </div><!-- End .col-sm-6 col-lg-3 -->
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="icon-box icon-box-side">
+                        <span class="icon-box-icon text-dark">
+                            <i class="icon-info-circle"></i>
+                        </span>
+
+                        <div class="icon-box-content">
+                            <h3 class="icon-box-title">Get Upto 50% Off</h3><!-- End .icon-box-title -->
+                            <p>Happy Shopping!</p>
+                        </div><!-- End .icon-box-content -->
+                    </div><!-- End .icon-box -->
+                </div><!-- End .col-sm-6 col-lg-3 -->
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="icon-box icon-box-side">
+                        <span class="icon-box-icon text-dark">
+                            <i class="icon-life-ring"></i>
+                        </span>
+
+                        <div class="icon-box-content">
+                            <h3 class="icon-box-title">We Support</h3><!-- End .icon-box-title -->
+                            <p>24/7 amazing services</p>
+                        </div><!-- End .icon-box-content -->
+                    </div><!-- End .icon-box -->
+                </div><!-- End .col-sm-6 col-lg-3 -->
+            </div><!-- End .row -->
+        </div><!-- End .container -->
+    </div><!-- End .icon-boxes-container -->
+</main><!-- End .main -->
+
+{% endblock %}

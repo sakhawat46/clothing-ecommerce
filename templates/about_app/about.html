@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} BGD Fashion | About {% endblock title %}
+{% block body %}
+
+
+<section id="aboutus">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 py-5">
+          <h1 class="text-center">About Us</h1>
+          <br>
+          {% for row in about_information %}
+          <h3 class="text-center">At A Glance:</h3>
+          <p class="text-justify">{{ row.at_a_glance }}</p>
+          <br>
+          <br>
+          <h3 class="text-center">Message From CEO:</h3>
+          <p class="text-justify">{{ row.message_from_ceo }}</p>
+          <br>
+          <br>
+          <h3 class="text-center">Company Profile:</h3>
+          <p class="text-justify">{{ row.company_profile }}</p>
+          <br>
+          <br>
+          <h3 class="text-center">Our Concern:</h3>
+          <p class="text-justify">{{ row.our_concern }}</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} BGD Fashion | Login {% endblock title %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block body %}
+
+
+<body>
+    <div style="padding: 50px;">
+        <form action="" method="POST">
+            {{ form | crispy }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary btn-sm">Login</button>
+        </form>
+        <br>
+        <p>Doesn't Have an account? <a href="{% url 'fashion_app:register' %}">Create New Account</a></p>
+    </div>
+</body>
+
+
+{% endblock %}

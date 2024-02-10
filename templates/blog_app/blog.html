@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} BGD Fashion | Blog {% endblock title %}
+{% block body %}
+
+
+<section id="blogpage">
+    <div class="container">
+        {% for row in blog_details %}
+        <h3 class="mt-5 mb-3">{{ row.blog_title }}</h3>
+        <i><h6>Publish On: {{row.publish_date}}</h6></i>
+        <div class="row">
+            <div class="col-sm-4">
+                <img src="/media/{{row.blog_image}}" width="100%">
+            </div>
+            <div class="col-sm-8">
+                <p class="text-justify">{{ row.blog_content | linebreaks }}</p>
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+    <br>
+  </section>
+
+
+{% endblock %}
