@@ -6,7 +6,7 @@ from store_app.models import Product, User, VariationValue
 User = get_user_model()
 
 class Cart(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cart')
+    user = models.CharField(max_length=200, null=True, blank=True)
     item = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
     size = models.CharField(max_length=100, blank=True, null=True)
@@ -71,10 +71,10 @@ class Cart(models.Model):
 class Order(models.Model):
     PAYMENT_METHOD = (
         ('Cash On Delivery', 'Cash On Delivery'),
-        ('SSLcommerz', 'Online Payment'),
+        # ('SSLcommerz', 'Online Payment'),
 
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.CharField(max_length=200, null=True, blank=True)
     orderitems = models.ManyToManyField(Cart)
     ordered = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
@@ -97,3 +97,19 @@ class Order(models.Model):
     def __str__(self):
         return f"{self.user} Orders"
 
+
+
+
+# # models.py
+# class Customer(models.Model):
+#     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
+#     name = models.CharField(max_length=200, null=True, blank=True)
+#     email = models.CharField(max_length=200, null=True, blank=True)
+#     device = models.CharField(max_length=200, null=True, blank=True)
+
+#     def __str__(self):
+#         if self.name:
+#             name = self.name
+#         else:
+#             name = self.device
+#         return str(name)

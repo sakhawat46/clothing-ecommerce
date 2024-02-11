@@ -11,7 +11,8 @@ User = get_user_model()
 # Create your models here.
 
 class BillingAddress(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='billing')
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='billing')
+    user = models.CharField(max_length=200, null=True, blank=True)
     first_name = models.CharField(max_length=20, blank=True, null=True)
     last_name = models.CharField(max_length=20, blank=True, null=True)
     country = models.CharField(max_length=20, blank=True, null=True)

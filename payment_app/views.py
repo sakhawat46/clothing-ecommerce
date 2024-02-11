@@ -34,11 +34,11 @@ from django.contrib import messages
 
 class CheckoutTemplateView(TemplateView):
     def get(self, request, *args, **kwargs):
-        saved_address = BillingAddress.objects.get_or_create(user = request.user or None)
+        saved_address = BillingAddress.objects.get_or_create(user = request.COOKIES['device'] or None)
         saved_address = saved_address[0]
         form = BillingAddressForm(instance=saved_address)
         payment_method = PaymentMethodForm()
-        order_qs = Order.objects.filter(user=request.user, ordered = False)
+        order_qs = Order.objects.filter(user=request.COOKIES['device'], ordered = False)
         if order_qs.exists():
             order_item = order_qs[0].orderitems.all()
             order_total = order_qs[0].get_totals()
@@ -54,10 +54,10 @@ class CheckoutTemplateView(TemplateView):
         return redirect('order_app:cart')
 
     def post(self, request, *args, **kwargs):
-        saved_address = BillingAddress.objects.get_or_create(user = request.user or None)
+        saved_address = BillingAddress.objects.get_or_create(user = request.COOKIES['device'] or None)
         saved_address = saved_address[0]
         form = BillingAddressForm(instance=saved_address)
-        payment_obj = Order.objects.filter(user=request.user, ordered=False)[0]
+        payment_obj = Order.objects.filter(user=request.COOKIES['device'], ordered=False)[0]
         payment_form = PaymentMethodForm(instance=payment_obj)
         if request.method == 'post' or request.method == 'POST':
             form = BillingAddressForm(request.POST, instance=saved_address)
@@ -72,14 +72,14 @@ class CheckoutTemplateView(TemplateView):
 
                 #Cash on delivary payment process
                 if pay_method.payment_method == 'Cash On Delivery':
-                    order_qs = Order.objects.filter(user=request.user, ordered=False)
+                    order_qs = Order.objects.filter(user=request.COOKIES['device'], ordered=False)
                     order = order_qs[0]
                     order.ordered = True
                     order.orderId = order.id
                     order.paymentId = pay_method.payment_method
                     order.save()
                     messages.success(request, "Order Successfully Completed")
-                    cart_items = Cart.objects.filter(user=request.user, purchased=False)
+                    cart_items = Cart.objects.filter(user=request.COOKIES['device'], purchased=False)
                     for item in cart_items:
                         item.purchased = True
                         item.save()
@@ -116,7 +116,7 @@ class CheckoutTemplateView(TemplateView):
 
                 
 
-                    order_qs = Order.objects.filter(user=request.user, ordered=False)
+                    order_qs = Order.objects.filter(user=request.COOKIES['device'], ordered=False)
                     order_items = order_qs[0].orderitems.all()
                     order_item_count = order_qs[0].orderitems.count()
                     order_total = order_qs[0].get_totals()
@@ -130,7 +130,7 @@ class CheckoutTemplateView(TemplateView):
 
                     mypayment.set_product_integration(total_amount=Decimal(order_total), currency='BDT', product_category='clothing', product_name=order_items, num_of_item=order_item_count, shipping_method='Courier', product_profile='None')
 
-                    current_user = request.user
+                    current_user = request.COOKIES['device']
 
                     print(current_user)
                     print(current_user.profile.full_name)
@@ -143,7 +143,7 @@ class CheckoutTemplateView(TemplateView):
 
 
 
-                    billing_address = BillingAddress.objects.filter(user=request.user) [0]
+                    billing_address = BillingAddress.objects.filter(user=request.COOKIES['device']) [0]
 
                     mypayment.set_customer_info(name=billing_address.first_name, email=current_user.email, address1=billing_address.address1, address2=billing_address.address2, city=billing_address.city, postcode=billing_address.zipcode, country=billing_address.country, phone=billing_address.phone_number)
 
@@ -200,13 +200,13 @@ def sslc_status(request):
 
 
 def sslc_complete(request, val_id, tran_id):
-    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    order_qs = Order.objects.filter(user=request.COOKIES['device'], ordered=False)
     order = order_qs[0]
     order.ordered = True
     order.orderId = val_id
     order.paymentId = tran_id
     order.save()
-    cart_items = Cart.objects.filter(user=request.user, purchased=False)
+    cart_items = Cart.objects.filter(user=request.COOKIES['device'], purchased=False)
     for item in cart_items:
         item.purchased = True
         item.save()
