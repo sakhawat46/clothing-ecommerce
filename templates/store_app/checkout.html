@@ -42,38 +42,17 @@
 									
 											<div class="row">
 												<div class="col-sm-6">
-													{{ billing_address.first_name|as_crispy_field }}
+													{{ billing_address.name|as_crispy_field }}
 												</div><!-- End .col-sm-6 -->
-	
-												<div class="col-sm-6">
-													{{ billing_address.last_name|as_crispy_field }}
-												</div><!-- End .col-sm-6 -->
+
 											</div><!-- End .row -->
 												
-											{{ billing_address.country|as_crispy_field }}
-												
-											{{ billing_address.address1|as_crispy_field }}
-											{{ billing_address.address2|as_crispy_field }}
-	
-											<div class="row">
-												<div class="col-sm-6">
-													{{ billing_address.city|as_crispy_field }}
-												</div><!-- End .col-sm-6 -->
-	
-												<div class="col-sm-6">
-													{{ billing_address.zipcode|as_crispy_field }}
-												</div><!-- End .col-sm-6 -->
-											</div><!-- End .row -->
-		
+
 											{{ billing_address.phone_number|as_crispy_field }}
+
+											{{ billing_address.address|as_crispy_field }}
 	
 									
-
-
-
-
-
-
 
 		                		</div><!-- End .col-lg-9 -->
 		                		<aside class="col-lg-3">

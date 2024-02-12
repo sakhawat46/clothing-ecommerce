@@ -88,7 +88,7 @@ def buy_now(request, pk):
         order = Order(user=request.COOKIES['device'])
         order.save()
         order.orderitems.add(order_item[0])
-        return redirect('store_app:index')
+        return redirect('order_app:cart')
 
     # else:
     #     return redirect('fashion_app:login')
